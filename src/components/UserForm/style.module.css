@@ -1,0 +1,14 @@
+
+
+.userForm{
+    width: 400px;
+    height: 520px;
+    background-color: #262626;
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 7px 29px 0px;;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    /* margin-bottom: 20px; */
+    padding-top: 20px;
+    border-radius: 10px;
+}

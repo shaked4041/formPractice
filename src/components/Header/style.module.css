@@ -1,0 +1,18 @@
+
+.header{
+    width: 100%;
+    height: 60px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+}
+
+
+
+.fa-user-secret{
+    color: orange; 
+    background-color: orange;
+}
+header .icon i {
+    color: #d2691e;
+}

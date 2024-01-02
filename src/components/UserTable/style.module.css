@@ -1,0 +1,29 @@
+
+
+.userTable{
+    width: 470px;
+    height: 520px;
+    background-color: #262626;
+    box-shadow: rgba(255, 255, 255, 0.311) 0px 7px 29px 0px;;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    padding-top: 20px;
+    /* align-items: center; */
+    /* margin-bottom: 20px; */
+}
+
+  th,
+  td {
+    padding: 2px;
+  }
+  
+  td {
+    padding-left: 30px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: rgb(55, 54, 54);
+    color: aliceblue;
+  }
+  
