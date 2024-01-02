@@ -1,7 +1,7 @@
 
 
 .userTable{
-    width: 470px;
+    /* width: 470px; */
     height: 520px;
     background-color: #262626;
     box-shadow: rgba(255, 255, 255, 0.311) 0px 7px 29px 0px;;
@@ -11,6 +11,15 @@
     padding-top: 20px;
     /* align-items: center; */
     /* margin-bottom: 20px; */
+    
+      max-width: 100%;
+      /* overflow-x: auto; */
+      /* border: 2px solid #333; */
+      /* border-collapse: collapse; */
+      /* box-shadow: 5px 5px 30px -5px #ffffff89; */
+      /* padding: 1rem; */
+      /* border-radius: 10px; */
+  
 }
 
   th,

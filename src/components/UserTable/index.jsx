@@ -1,37 +1,58 @@
 
-import React, { useState } from 'react';
-import styles from './style.module.css';
+// import  { useState } from 'react';
+// import styles from './style.module.css';
 
-export default function UserTable({inputText}) {
+// export default function UserTable({users}) {
 
-    // const [users, setUsers] = useState(
-        let users =[
-    { fname: 'Alice', lname: 'Smith', email: 'alice@example.com' },
-    { fname: 'Bob', lname: 'Jones', email: 'bob@example.com' },
-    { fname: 'Charlie', lname: 'Brown', email: 'charlie@example.com' }
-  ]
+
+//   function buildTable(data) {
+//     return data.map((user, index=0) => (
+//       <tr key={index}>
+//         <td>{index+1}</td>
+//         <td>{user.fname}</td>
+//         <td>{user.lname}</td>
+//         <td>{user.email}</td>
+//       </tr>
+//     ));
+//   }
+
+
+
+//   return (
+//     <div className={styles.userTable}>
+//       <div className="chart">
+//         <table>
+//           <thead>
+//             <tr>
+//               <th>ID</th>
+//               <th>First Name</th>
+//               <th>Last Name</th>
+//               <th>Email</th>
+//             </tr>
+//           </thead>
+//           <tbody className={styles.myTable}>{buildTable(users)}
+//           </tbody>
+//         </table>
+//       </div>
+//     </div>
 //   );
+// }
+// UserTable.jsx
 
-//   const addUser = () => {
-//       setUsers(prevUsers => [
-//         ...prevUsers,
-//         { fname: inputText, lname: 'Doe', email: `${inputText.toLowerCase()}@example.com` }
-//       ]);
-//     };
+import React from 'react';
+import styles from './style.module.css';
+export default function UserTable({ users }) {
 
-
-  function buildTable(data) {
-    return data.map((user, index=0) => (
-      <tr key={user.id}>
-        <td>{index+1}</td>
-        <td>{user.fname}</td>
-        <td>{user.lname}</td>
-        <td>{user.email}</td>
-      </tr>
-    ));
-  }
-
-
+function buildTable(data) {
+  return data.map((user, index) => (
+    <tr key={index}>
+      <td>{index + 1}</td>
+      <td>{user.fname}</td>
+      <td>{user.lname}</td>
+      <td>{user.email}</td>
+    </tr>
+  ));
+}
 
   return (
     <div className={styles.userTable}>
@@ -45,8 +66,7 @@ export default function UserTable({inputText}) {
               <th>Email</th>
             </tr>
           </thead>
-          <tbody className={styles.myTable}>{buildTable(users)}
-          </tbody>
+          <tbody className={styles.myTable}>{buildTable(users)}</tbody>
         </table>
       </div>
     </div>

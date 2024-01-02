@@ -1,36 +1,39 @@
 
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 import styles from './style.module.css'
-import UserTable from '../UserTable'
 
-export default function FormInput() {
-   const initialState = localStorage.user ? JSON.parse(localStorage.user) : { name: '', password: '' }
+export default function FormInput({ setUsers }) {
+   const storedUser = localStorage.user;
+
+   // const initialState = localStorage.user ? JSON.parse(localStorage.user) :{ fname: '', lname: '', email: '', password: '' };
+   const initialState = storedUser ? (isValidJSON(storedUser) ? JSON.parse(storedUser) : { fname: '', lname: '', email: '', password: '' }) : { fname: '', lname: '', email: '', password: '' };
+
    const [formState, setFormState] = useState(initialState)
    const [errorForm, setErrorForm] = useState({ fname: '', lname: '', email: '', password: '' })
-   const [inputText, setinputText] = useState({});
 
+   function isValidJSON(str) {
+      try {
+        JSON.parse(str);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
    const handleSubmit = (event) => {
-      event.preventDefault()
-      setinputText(localStorage.getItem('user'))
-
-   }
-             <UserTable inputText={inputText}/>
-
-
-
-   // const [users, setUsers] = useState([
-   //    { fname: 'Alice', lname: 'Smith', email: 'alice@example.com' },
-   //    { fname: 'Bob', lname: 'Jones', email: 'bob@example.com' },
-   //    { fname: 'Charlie', lname: 'Brown', email: 'charlie@example.com' }
-   //  ]);
-  
-   //  const addUser = () => {
-   //      setUsers(prevUsers => [
-   //        ...prevUsers,
-   //        { fname: inputText, lname: 'Doe', email: `${inputText.toLowerCase()}@example.com` }
-   //      ]);
-   //    };
+      event.preventDefault();
+      setUsers(prevUsers => [
+         ...prevUsers,
+         {
+            fname: formState.fname,
+            lname: formState.lname,
+            email: formState.email
+         }
+      ]);
+      setFormState({ fname: '', lname: '', email: '', password: '' });
+      localStorage.user = initialState
+   };
+   
 
    const handleChange = (event) => {
       const { name, value } = event.target
@@ -41,28 +44,31 @@ export default function FormInput() {
          return newData
       })
 
+
+
       setErrorForm(old => ({ ...old, [name]: '' }))
 
-      if (name === 'fname' && value.length < 5) {
+      if (name === 'fname' && value.length < 3) {
          setErrorForm(old => ({ ...old, [name]: 'Please enter your first name' }))
       }
 
-      if (name === 'lname' && value.length < 5) {
+      if (name === 'lname' && value.length < 3) {
          setErrorForm(old => ({ ...old, [name]: 'Please enter your last name' }))
       }
 
-      if (name === 'email' && value.length < 15) {
+      if (name === 'email' && value.length < 10) {
          setErrorForm(old => ({ ...old, [name]: 'Please enter a valid email' }))
       }
 
-      if (name === 'password' && value.length < 15) {
+      if (name === 'password' && value.length < 10) {
          setErrorForm(old => ({ ...old, [name]: 'Password should contain at least one uppercase, one lowercase, and one digit, and be 6 to 15 characters long' }))
       }
 
    }
-   console.log(localStorage.getItem('user'));
 
    return (
+          <div className={styles.FormInput}>
+
       <form className={styles.form} onSubmit={handleSubmit} >
 
          <p className={styles.add}>Add new user</p>
@@ -95,9 +101,10 @@ export default function FormInput() {
             {errorForm.password && <div className={styles.error}>{errorForm.password}</div>}
          </div>
 
-         <button type='submit' onClick={()=>{handleSubmit}}>Submit</button>
+         <button type='submit'>Submit</button>
 
       </form>
+</div>
    )
 }
 

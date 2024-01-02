@@ -41,21 +41,14 @@ height: 100%;
 form button {
     border-radius: 40px;
     padding: 0.4rem 1.3rem;
-    margin: 1rem auto;
+    margin: 2.5rem auto;
     width: fit-content;
     border: none;
     background-color: #000;
     color: #fff;
+    /* margin-top: 30px; */
 }
 .error{
-    /* background-color: rgb(197, 83, 83);
-    width: 300px;
-    height: 20px;
-    border-radius: 10px;
-    align-items: center;
-    justify-content: center;
-    align-self: center;
-    margin-left: 35px; */
     width: 100%;
     font-size: .6rem;
     background-color: #ff7d7d;
@@ -65,8 +58,19 @@ form button {
     height: 1.8rem;
     display: flex;
     align-items: center;
-    /* margin: 0.3rem 0; */
-    /* margin-top: 2px; */
     padding: 0 0.6rem;
     overflow-x: auto;
+}
+
+
+
+.FormInput{
+    width: 400px;
+    height: 520px;
+    background-color: #262626;
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 7px 29px 0px;;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    border-radius: 10px;
 }
