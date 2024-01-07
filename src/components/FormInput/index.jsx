@@ -6,7 +6,6 @@ import styles from './style.module.css'
 export default function FormInput({ setUsers }) {
    const storedUser = localStorage.user;
 
-   // const initialState = localStorage.user ? JSON.parse(localStorage.user) :{ fname: '', lname: '', email: '', password: '' };
    const initialState = storedUser ? (isValidJSON(storedUser) ? JSON.parse(storedUser) : { fname: '', lname: '', email: '', password: '' }) : { fname: '', lname: '', email: '', password: '' };
 
    const [formState, setFormState] = useState(initialState)
@@ -20,6 +19,7 @@ export default function FormInput({ setUsers }) {
         return false;
       }
     }
+
    const handleSubmit = (event) => {
       event.preventDefault();
       setUsers(prevUsers => [
