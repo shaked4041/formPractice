@@ -1,11 +1,11 @@
-
-.form{
-display: flex;
-flex-direction: column;
-width: 370px;
-height: 100%;
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 370px;
+    height: 100%;
 }
-.add{
+
+.add {
     align-self: center;
     font-size: 25px;
     font-weight: 700
@@ -18,7 +18,8 @@ height: 100%;
     width: 50%;
     background-color: #d2691e;
 }
-.singleInput{
+
+.singleInput {
     margin-top: 15px;
     margin-bottom: 10px;
     /* width: 100%; */
@@ -28,7 +29,7 @@ height: 100%;
     display: flex;
 }
 
- input {
+input {
     flex: 1;
     padding: 0.2rem 0.7rem;
     border-radius: 5px;
@@ -46,9 +47,11 @@ form button {
     border: none;
     background-color: #000;
     color: #fff;
+    cursor: pointer;
     /* margin-top: 30px; */
 }
-.error{
+
+.error {
     width: 100%;
     font-size: .6rem;
     background-color: #ff7d7d;
@@ -64,13 +67,27 @@ form button {
 
 
 
-.FormInput{
+.FormInput {
     width: 400px;
     height: 520px;
     background-color: #262626;
-    box-shadow: rgba(255, 255, 255, 0.2) 0px 7px 29px 0px;;
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 7px 29px 0px;
+    ;
     display: flex;
     justify-content: center;
     padding-top: 20px;
     border-radius: 10px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.deleteButton {
+    cursor: pointer;
+}
+
+.switchButton {
+    cursor: pointer;
 }
