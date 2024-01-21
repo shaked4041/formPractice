@@ -1,19 +1,23 @@
 import Header from './components/Header'
 import Footer from './components/Footer'
 import UserTable from './components/UserTable'
-import { useState } from 'react';
-import FormInput from './components/FormInput';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import Add from './components/Add';
+import Edit from './components/Edit';
 
 export default function Layout() {
+    const [currentUser, setCurrentUser] = useState(null)
+    const [users, setUsers] = useState([]);
 
-       const [inputText, setinputText] = useState({});
+    useEffect(() => {
+        axios.get('http://localhost:4004/users')
+            .then(res => {
+                setUsers(res.data)
+            })
+            .catch(console.error)
+    }, [])
 
-    const [users, setUsers] = useState([
-        { fname: 'Alice', lname: 'Smith', email: 'alice@example.com' },
-        { fname: 'Bob', lname: 'Jones', email: 'bob@example.com' },
-        { fname: 'Charlie', lname: 'Brown', email: 'charlie@example.com' }
-      ]
-      );
 
     return (
         <div className='layout'>
@@ -21,8 +25,8 @@ export default function Layout() {
             <div className='content'>
                 <img src="https://users-and-chill.netlify.app/1.png" alt="fox" className="pic" />
                 <div className='forms'>
-                    <FormInput setinputText={setinputText} setUsers={setUsers} inputText={inputText}/>
-                    <UserTable users={users} inputText={inputText}/>
+                    {currentUser? <Edit setUsers={setUsers} users= {users} user={currentUser} onClickId={setCurrentUser}/> : <Add setUsers={setUsers} />}
+                    <UserTable users={users} setUsers={setUsers} onClickId={setCurrentUser}/>
                 </div>
             </div>
             <Footer />

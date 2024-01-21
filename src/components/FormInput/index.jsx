@@ -2,38 +2,31 @@
 
 import { useState } from 'react'
 import styles from './style.module.css'
+import axios from 'axios';
+import Add from '../Add';
 
-export default function FormInput({ setUsers }) {
-   const storedUser = localStorage.user;
+export default function FormInput({ onSubmit, title, user, deleteUser, switchToAdd }) {
 
-   // const initialState = localStorage.user ? JSON.parse(localStorage.user) :{ fname: '', lname: '', email: '', password: '' };
-   const initialState = storedUser ? (isValidJSON(storedUser) ? JSON.parse(storedUser) : { fname: '', lname: '', email: '', password: '' }) : { fname: '', lname: '', email: '', password: '' };
+   const initialState = { firstName: user?.firstName || '', lastName: user?.lastName || '', email: user?.email || '', password: user?.password || '' };
 
    const [formState, setFormState] = useState(initialState)
-   const [errorForm, setErrorForm] = useState({ fname: '', lname: '', email: '', password: '' })
+   const [errorForm, setErrorForm] = useState({ firstName: '', lastName: '', email: '', password: '' })
 
-   function isValidJSON(str) {
-      try {
-        JSON.parse(str);
-        return true;
-      } catch (e) {
-        return false;
-      }
-    }
+   // function isValidJSON(str) {
+   //    try {
+   //       JSON.parse(str);
+   //       return true;
+   //    } catch (e) {
+   //       return false;
+   //    }
+   // }
+
    const handleSubmit = (event) => {
       event.preventDefault();
-      setUsers(prevUsers => [
-         ...prevUsers,
-         {
-            fname: formState.fname,
-            lname: formState.lname,
-            email: formState.email
-         }
-      ]);
-      setFormState({ fname: '', lname: '', email: '', password: '' });
-      localStorage.user = initialState
+      onSubmit(formState)
+      setFormState({ firstName: '', lastName: '', email: '', password: '' });
    };
-   
+
 
    const handleChange = (event) => {
       const { name, value } = event.target
@@ -48,11 +41,11 @@ export default function FormInput({ setUsers }) {
 
       setErrorForm(old => ({ ...old, [name]: '' }))
 
-      if (name === 'fname' && value.length < 3) {
+      if (name === 'firstName' && value.length < 3) {
          setErrorForm(old => ({ ...old, [name]: 'Please enter your first name' }))
       }
 
-      if (name === 'lname' && value.length < 3) {
+      if (name === 'lastName' && value.length < 3) {
          setErrorForm(old => ({ ...old, [name]: 'Please enter your last name' }))
       }
 
@@ -67,44 +60,44 @@ export default function FormInput({ setUsers }) {
    }
 
    return (
-          <div className={styles.FormInput}>
+      <div className={styles.FormInput}>
 
-      <form className={styles.form} onSubmit={handleSubmit} >
+         <form className={styles.form} onSubmit={handleSubmit} >
 
-         <p className={styles.add}>Add new user</p>
-         <div className={styles.line}></div>
+            <p className={styles.add}>{title}</p>
+            <div className={styles.line}></div>
 
-         <div className={styles.singleInput}>
-            <label>First Name</label>
-            <input onChange={handleChange} value={formState.fname} type="name" name='fname' />
-            {errorForm.fname && <div className={styles.error}>{errorForm.fname}</div>}
-         </div>
+            <div className={styles.singleInput}>
+               <label>First Name</label>
+               <input onChange={handleChange} value={formState.firstName} type="name" name='firstName' />
+               {errorForm.firstName && <div className={styles.error}>{errorForm.firstName}</div>}
+            </div>
 
-         <div className={styles.singleInput}>
-            <label>Last Name</label>
-            <input onChange={handleChange} value={formState.lname} type="name" name='lname' />
-            {errorForm.lname && <div className={styles.error}>{errorForm.lname}</div>}
-         </div>
+            <div className={styles.singleInput}>
+               <label>Last Name</label>
+               <input onChange={handleChange} value={formState.lastName} type="name" name='lastName' />
+               {errorForm.lastName && <div className={styles.error}>{errorForm.lastName}</div>}
+            </div>
 
-         <div className={styles.singleInput}>
-            <label>Email</label>
-            <input onChange={handleChange} value={formState.email} type="email" name='email' />
-            {errorForm.email && <div className={styles.error}>{errorForm.email}</div>}
-         </div>
+            <div className={styles.singleInput}>
+               <label>Email</label>
+               <input onChange={handleChange} value={formState.email} type="email" name='email' />
+               {errorForm.email && <div className={styles.error}>{errorForm.email}</div>}
+            </div>
 
-         {/* <div className={`${styles.error} ${errorForm.name ? styles.vis : ''}`}>{errorForm.name} */}
+            <div className={styles.singleInput}>
+               <label>Password</label>
+               <input onChange={handleChange} value={formState.password} type="password" name='password' />
+               {errorForm.password && <div className={styles.error}>{errorForm.password}</div>}
+            </div>
 
-
-         <div className={styles.singleInput}>
-            <label>Password</label>
-            <input onChange={handleChange} value={formState.password} type="password" name='password' />
-            {errorForm.password && <div className={styles.error}>{errorForm.password}</div>}
-         </div>
-
-         <button type='submit'>Submit</button>
-
-      </form>
-</div>
+            <button type='submit'>Submit</button>
+            <div className={styles.buttons}>
+               {user && <button className={styles.deleteButton} onClick={() => switchToAdd()}>Switch To Add User</button>}
+               {user && <button className={styles.switchButton} onClick={() => deleteUser(user?.id)}>Delete User</button>}
+            </div>
+         </form>
+      </div>
    )
 }
 
